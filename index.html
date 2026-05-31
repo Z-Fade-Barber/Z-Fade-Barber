@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Z-Fade Barber — Coiffure Hommes Vannes</title>
+  <meta name="description" content="Z-Fade Barber, barbershop masculin au 16 rue Hoche, Vannes. Coupes homme, barbe, soins visage. Réservez en ligne." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E2C475;
+      --black: #0a0a0a;
+      --dark: #111111;
+      --card: #181818;
+      --border: #2a2a2a;
+      --white: #FFFFFF;
+      --muted: #888888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: color 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .btn-nav {
+      background: var(--gold);
+      color: var(--black);
+      padding: 10px 24px;
+      border: none;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+    }
+
+    .btn-nav:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      background: radial-gradient(ellipse at center top, #1c1510 0%, var(--black) 70%);
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgba(201,168,76,0.015) 40px,
+        rgba(201,168,76,0.015) 41px
+      );
+    }
+
+    .hero-logo {
+      width: 260px;
+      margin-bottom: 32px;
+      margin-left: 0;
+      filter: drop-shadow(0 0 30px rgba(201,168,76,0.25));
+    }
+
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .hero-divider::before,
+    .hero-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      width: 80px;
+    }
+
+    .hero-divider span {
+      color: var(--gold);
+      font-size: 1.1rem;
+    }
+
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+
+    .hero-tagline .gold { color: var(--gold); }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 400;
+      margin-bottom: 48px;
+    }
+
+    .btn-hero {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      padding: 18px 52px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-hero:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(201,168,76,0.3);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollAnim 1.8s ease-in-out infinite;
+    }
+
+    @keyframes scrollAnim {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: 96px 24px;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      color: var(--gold);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .section-line {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 56px;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--dark); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2px;
+    }
+
+    .service-card {
+      background: var(--card);
+      padding: 32px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.4s ease;
+    }
+
+    .service-card:hover::before { width: 100%; }
+    .service-card:hover { background: #1e1e1e; }
+
+    .service-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .service-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 4px;
+      font-weight: 300;
+    }
+
+    .service-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gold);
+      white-space: nowrap;
+      margin-left: 16px;
+    }
+
+    .service-price span {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    /* ── HORAIRES ── */
+    #horaires {
+      background: var(--black);
+    }
+
+    .horaires-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .horaires-table {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .horaire-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .horaire-row:first-child { border-top: 1px solid var(--border); }
+
+    .horaire-day {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .horaire-time {
+      color: var(--gold);
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-align: right;
+    }
+
+    .horaire-closed {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .info-block {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .info-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .info-icon {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .info-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--gold);
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    .info-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .info-value {
+      font-size: 0.95rem;
+      color: var(--white);
+      font-weight: 400;
+    }
+
+    /* ── RÉSERVATION ── */
+    #reservation {
+      background: linear-gradient(135deg, #13100a 0%, #1a1408 50%, #0d0b07 100%);
+      text-align: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .resa-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .resa-inner .section-line { margin: 0 auto 56px; }
+
+    .resa-text {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+
+    .btn-resa {
+      display: inline-block;
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 18px 52px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+      margin-right: 16px;
+      margin-bottom: 16px;
+    }
+
+    .btn-resa:hover {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    .btn-resa-solid {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      border: 1px solid var(--gold);
+      padding: 18px 52px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+      margin-bottom: 16px;
+    }
+
+    .btn-resa-solid:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(201,168,76,0.3);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080808;
+      padding: 48px 24px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-logo {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .footer-logo span { color: var(--gold); }
+
+    .footer-sub {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    .footer-bottom {
+      font-size: 0.72rem;
+      color: #444;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+
+      .horaires-wrapper {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .btn-resa, .btn-resa-solid {
+        display: block;
+        margin-right: 0;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Z<span>-</span>FADE<span>-</span>BARBER</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#horaires">Horaires</a></li>
+      <li><a href="#reservation">Contact</a></li>
+    </ul>
+    <a href="https://cal.com/z-fade-barber" target="_blank" class="btn-nav">Réserver</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <img src="zfade-logo.png" class="hero-logo" alt="Z-Fade Barber Logo" />
+
+    <div class="hero-divider">
+      <span>✦</span>
+    </div>
+
+    <h1 class="hero-tagline">
+      Le Barbershop<br/>de <span class="gold">Vannes</span>
+    </h1>
+    <p class="hero-sub">16 Rue Hoche · 56000 Vannes · Coiffure Hommes</p>
+
+    <a href="https://cal.com/z-fade-barber" target="_blank" class="btn-hero">
+      Prendre rendez-vous
+    </a>
+
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Découvrir</span>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-inner">
+      <p class="section-label">Nos prestations</p>
+      <h2 class="section-title">Services & Tarifs</h2>
+      <div class="section-line"></div>
+
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div>
+            <div class="service-name">Coupe + Barbe</div>
+            <div class="service-desc">Formule complète</div>
+          </div>
+          <div class="service-price">25 <span>€</span></div>
+        </div>
+
+        <div class="service-card">
+          <div>
+            <div class="service-name">Coupe Homme</div>
+            <div class="service-desc">Coupe, dégradé, finitions</div>
+          </div>
+          <div class="service-price">20 <span>€</span></div>
+        </div>
+
+        <div class="service-card">
+          <div>
+            <div class="service-name">Coupe Enfant</div>
+            <div class="service-desc">Moins de 12 ans</div>
+          </div>
+          <div class="service-price">15 <span>€</span></div>
+        </div>
+
+        <div class="service-card">
+          <div>
+            <div class="service-name">Barbe</div>
+            <div class="service-desc">Taille & mise en forme</div>
+          </div>
+          <div class="service-price">10 <span>€</span></div>
+        </div>
+
+        <div class="service-card">
+          <div>
+            <div class="service-name">Soin de Visage</div>
+            <div class="service-desc">Nettoyage & hydratation</div>
+          </div>
+          <div class="service-price">30 <span>€</span></div>
+        </div>
+
+        <div class="service-card">
+          <div>
+            <div class="service-name">Teinture Barbe</div>
+            <div class="service-desc">Coloration noire</div>
+          </div>
+          <div class="service-price">15 <span>€</span></div>
+        </div>
+
+        <div class="service-card">
+          <div>
+            <div class="service-name">Teinture Cheveux</div>
+            <div class="service-desc">Coloration noire</div>
+          </div>
+          <div class="service-price">25 <span>€</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HORAIRES & CONTACT -->
+  <section id="horaires">
+    <div class="section-inner">
+      <div class="horaires-wrapper">
+
+        <div>
+          <p class="section-label">Planning</p>
+          <h2 class="section-title">Horaires</h2>
+          <div class="section-line"></div>
+
+          <div class="horaires-table">
+            <div class="horaire-row">
+              <span class="horaire-day">Lundi</span>
+              <span class="horaire-time">9h–12h &nbsp;·&nbsp; 14h–19h</span>
+            </div>
+            <div class="horaire-row">
+              <span class="horaire-day">Mardi</span>
+              <span class="horaire-time">9h–12h &nbsp;·&nbsp; 14h–19h</span>
+            </div>
+            <div class="horaire-row">
+              <span class="horaire-day">Mercredi</span>
+              <span class="horaire-time">9h–12h &nbsp;·&nbsp; 14h–19h</span>
+            </div>
+            <div class="horaire-row">
+              <span class="horaire-day">Jeudi</span>
+              <span class="horaire-time">9h–12h &nbsp;·&nbsp; 14h–19h</span>
+            </div>
+            <div class="horaire-row">
+              <span class="horaire-day">Vendredi</span>
+              <span class="horaire-time">9h–12h &nbsp;·&nbsp; 14h–19h</span>
+            </div>
+            <div class="horaire-row">
+              <span class="horaire-day">Samedi</span>
+              <span class="horaire-time">9h–12h &nbsp;·&nbsp; 14h–19h</span>
+            </div>
+            <div class="horaire-row">
+              <span class="horaire-day">Dimanche</span>
+              <span class="horaire-closed">Fermé</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="section-label">Nous trouver</p>
+          <h2 class="section-title">Contact</h2>
+          <div class="section-line"></div>
+
+          <div class="info-block">
+
+            <div class="info-item">
+              <div class="info-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+              </div>
+              <div>
+                <div class="info-label">Adresse</div>
+                <div class="info-value">16 Rue Hoche<br/>56000 Vannes</div>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.02 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="info-label">Téléphone</div>
+                <div class="info-value">À renseigner</div>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                  <path d="M8 21h8M12 17v4"/>
+                </svg>
+              </div>
+              <div>
+                <div class="info-label">Réservation en ligne</div>
+                <div class="info-value">
+                  <a href="https://cal.com/z-fade-barber" target="_blank" style="color: var(--gold); text-decoration: none;">cal.com/z-fade-barber</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RÉSERVATION CTA -->
+  <section id="reservation">
+    <div class="section-inner resa-inner">
+      <p class="section-label">Disponible 24h/24</p>
+      <h2 class="section-title">Réservez en ligne</h2>
+      <div class="section-line"></div>
+      <p class="resa-text">
+        Plus besoin d'appeler. Choisissez votre créneau, votre prestation et votre barbier directement en ligne. Confirmation immédiate.
+      </p>
+      <a href="https://cal.com/z-fade-barber" target="_blank" class="btn-resa-solid">
+        Prendre rendez-vous
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Z<span>-</span>FADE<span>-</span>BARBER</div>
+    <div class="footer-sub">Coiffure Hommes · Vannes</div>
+    <div class="footer-bottom">
+      © 2026 Z-Fade Barber · 16 Rue Hoche, 56000 Vannes
+    </div>
+  </footer>
+
+</body>
+</html>
